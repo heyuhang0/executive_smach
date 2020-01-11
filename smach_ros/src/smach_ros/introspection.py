@@ -60,7 +60,7 @@ class IntrospectionClient():
         initial_status_msg = SmachContainerInitialStatusCmd(
                 path = path,
                 initial_states = initial_states,
-                local_data = pickle.dumps(initial_userdata._data,2))
+                local_data = pickle.dumps(initial_userdata._data, 0).decode())
 
         # A status message to receive confirmation that the state was set properly
         msg_response = SmachContainerStatus()
@@ -222,7 +222,7 @@ class ContainerProxy():
                     path,
                     self._container.get_initial_states(),
                     self._container.get_active_states(),
-                    pickle.dumps(self._container.userdata._data,2),
+                    pickle.dumps(self._container.userdata._data, 0).decode(),
                     info_str)
             # Publish message
             self._status_pub.publish(state_msg)
